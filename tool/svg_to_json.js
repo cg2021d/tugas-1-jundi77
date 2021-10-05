@@ -43,11 +43,15 @@ for (var i = 0; i < paths.length; i++) {
         for (var k = 0; k < part_d.length; k++) {
             let coord = part_d[k].split(' ');
             for (let l = 0; l < coord.length; l++) {
+                if(coord[l] == "") {
+                    coord.splice(l, 1)
+                    l--;
+                    continue;
+                }
                 coord[l] = parseFloat(coord[l])
             }
             coords.push(coord)
         }
-    
         result.data.push([coords, color]);
     }
 }
