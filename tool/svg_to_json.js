@@ -30,23 +30,26 @@ for (var i = 0; i < paths.length; i++) {
     var color = path.style.fill;
     var path_d = path.getAttribute('d')
 
-    path_d = path_d.replace('         M ', '')
     path_d = path_d.replace('z', '')
-    path_d = path_d.replaceAll('        L', '')
-    path_d = path_d.split('  ')
+    path_d = path_d.split('        M ')
 
-    if (path_d.length == 0) continue;
-    coords = []
+    // skip first element, empty string
+    for (let j = 1; j < path_d.length; j++) {
+        let part_d = path_d[j].split('         L ')
     
-    for (var j = 0; j < path_d.length; j++) {
-        let coord = path_d[j].split(' ');
-        for (let k = 0; k < coord.length; k++) {
-            coord[k] = parseFloat(coord[k])
-        }
-        coords.push(coord)
-    }
+        if (part_d.length == 0) continue;
+        coords = []
 
-    result.data.push([coords, color]);
+        for (var k = 0; k < part_d.length; k++) {
+            let coord = part_d[k].split(' ');
+            for (let l = 0; l < coord.length; l++) {
+                coord[l] = parseFloat(coord[l])
+            }
+            coords.push(coord)
+        }
+    
+        result.data.push([coords, color]);
+    }
 }
 
 
