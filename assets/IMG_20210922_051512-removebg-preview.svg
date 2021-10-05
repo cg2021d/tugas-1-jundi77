@@ -1,7 +1,5 @@
-<?x
-        M l version="1.0" standalone="yes"?>
-<svg x
-        M lns="http://www.w3.org/2000/svg" width="577" height="433">
+<?xml version="1.0" standalone="yes"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="577" height="433">
 <path style="fill:#cbc4c2; stroke:none;" d="
         M  190.667 67.3333
         L 190.667 67.6667
