@@ -10,6 +10,17 @@ function download(content, fileName, contentType) {
     URL.revokeObjectURL(a.href)
 }
 
+function css_rgb_get_val(style) {
+    var rgb = style.match(/\d+/g);
+
+    let rgb_extract = [];
+    for(var i in rgb) {
+        rgb_extract.push(parseInt(rgb[i]));
+    }
+
+    return rgb_extract;
+}
+
 var paths = document.getElementsByTagName('svg')[0].getElementsByTagName('path')
 var result = {'data' : []}
 
@@ -27,7 +38,7 @@ var result = {'data' : []}
 
 for (var i = 0; i < paths.length; i++) {
     var path = paths[i];
-    var color = path.style.fill;
+    var color = css_rgb_get_val(path.style.fill);
     var path_d = path.getAttribute('d')
 
     path_d = path_d.replace('z', '')
