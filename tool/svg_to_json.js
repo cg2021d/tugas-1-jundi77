@@ -15,8 +15,9 @@ function css_rgb_get_val(style) {
 
     let rgb_extract = [];
     for(var i in rgb) {
-        rgb_extract.push(parseInt(rgb[i]));
+        rgb_extract.push(parseFloat(rgb[i]));
     }
+    rgb_extract.push(1.0);
 
     return rgb_extract;
 }
