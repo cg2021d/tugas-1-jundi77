@@ -167,7 +167,7 @@ function main() {
         uniform float uChange;
 
         void main() {
-            gl_Position = vec4(aVertexPosition + uChange, 0.0, 1.0);
+            gl_Position = vec4(aVertexPosition.x, aVertexPosition.y + uChange, 1.0, 1.0);
             vColor = aVertexColor;
         }
     `;
