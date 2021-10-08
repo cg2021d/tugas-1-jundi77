@@ -1,4 +1,5 @@
 //* PASTE THIS CODE TO WEB CONSOLE AND CALL convert(...) WITH JSON'S URL RESULT FROM svg_to_json.js
+// ! scaling salah, rasio webgl tidak selalu persegi
 
 function to_webgl_coord(json, min_x_webgl, min_y_webgl, canvas_size) {
     /**
@@ -58,11 +59,19 @@ function to_webgl_coord(json, min_x_webgl, min_y_webgl, canvas_size) {
     let y_size = Math.abs(max_y - min_y);
     let x_size = Math.abs(max_x - min_x);
 
+    // Hitung rasio scale
+    let ratio_scale = 1.0
+    if (y_size > x_size) {
+        ratio_scale = y_size / canvas_size
+    } else {
+        ratio_scale = x_size / canvas_size
+    }
+
     // CONVERT COORDINATE
     for (let i = 0; i < data.length; i++) {
         for (let j = 0; j < data[i][0].length; j++) {
-            data[i][0][j][0] = min_x_webgl + (data[i][0][j][0] - min_x) / x_size * canvas_size;
-            data[i][0][j][1] = min_y_webgl + (data[i][0][j][1] - min_y) / y_size * canvas_size;
+            data[i][0][j][0] = min_x_webgl + (data[i][0][j][0] - min_x) * ratio_scale;
+            data[i][0][j][1] = min_y_webgl + (data[i][0][j][1] - min_y) * ratio_scale;
         }
     }
 
