@@ -1,6 +1,8 @@
 //* PASTE THIS CODE TO WEB CONSOLE AND CALL convert(...) WITH JSON'S URL RESULT FROM svg_to_json.js
 // ! scaling salah, rasio webgl tidak selalu persegi
 
+// convert('http://127.0.0.1:5500/data/daging_r.json', -1, 0, 1)
+
 function to_webgl_coord(json, min_x_webgl, min_y_webgl, canvas_size) {
     /**
      * JSON STRUCTURE
@@ -62,9 +64,9 @@ function to_webgl_coord(json, min_x_webgl, min_y_webgl, canvas_size) {
     // Hitung rasio scale
     let ratio_scale = 1.0
     if (y_size > x_size) {
-        ratio_scale = y_size / canvas_size
+        ratio_scale = 1 / y_size * canvas_size
     } else {
-        ratio_scale = x_size / canvas_size
+        ratio_scale = 1 / x_size * canvas_size
     }
 
     // CONVERT COORDINATE
@@ -72,6 +74,11 @@ function to_webgl_coord(json, min_x_webgl, min_y_webgl, canvas_size) {
         for (let j = 0; j < data[i][0].length; j++) {
             data[i][0][j][0] = min_x_webgl + (data[i][0][j][0] - min_x) * ratio_scale;
             data[i][0][j][1] = min_y_webgl + (data[i][0][j][1] - min_y) * ratio_scale;
+        }
+
+        // CONVERT RGB
+        for (let j = 0; j < 3; j++) {
+            data[i][1][j] /= 255;
         }
     }
 
