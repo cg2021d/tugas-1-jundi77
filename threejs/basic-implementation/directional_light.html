@@ -21,7 +21,7 @@
         }
 
         function createPlane() {
-                let geometry = new THREE.PlaneGeometry(1, 1);
+                let geometry = new THREE.SphereGeometry(1, 32, 16);
                 let material  = new THREE.MeshPhongMaterial({color: 0x333333});
                 plane = new THREE.Mesh(geometry, material);
                 scene.add(plane);
@@ -51,7 +51,7 @@
             scene = new THREE.Scene();
             scene.background = new THREE.Color(0xababab);
             light = new THREE.DirectionalLight(0xFFFFFF, 1);
-            light.position.set(0, 0, 15);
+            light.position.set(0, 0, 1);
 
             // 2. create an locate the camera       
             camera = new THREE.PerspectiveCamera(30, window.innerWidth / window.innerHeight, 
