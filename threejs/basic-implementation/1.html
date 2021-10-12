@@ -15,14 +15,14 @@
         
         function createCube() {
                 let geometry = new THREE.BoxGeometry(1, 1, 1);
-                let material  = new THREE.MeshBasicMaterial({color: 0x00a1cb});
+                let material  = new THREE.MeshPhongMaterial({color: 0x44ab88});
                 cube = new THREE.Mesh(geometry, material);
                 scene.add(cube)
         }
 
         function createPlane() {
                 let geometry = new THREE.PlaneGeometry(1, 1);
-                let material  = new THREE.MeshBasicMaterial({color: 0x333333});
+                let material  = new THREE.MeshPhongMaterial({color: 0x333333});
                 plane = new THREE.Mesh(geometry, material);
                 scene.add(plane);
                 plane.position.y=2;
@@ -30,7 +30,7 @@
 
         function createCircle() {
                 let geometry = new THREE.CircleGeometry(1, 32);
-                let material  = new THREE.MeshBasicMaterial({color: 0x000000});
+                let material  = new THREE.MeshPhongMaterial({color: 0x000000});
                 circle = new THREE.Mesh(geometry, material);
                 scene.add(circle);
                 circle.position.y=-2;
@@ -38,7 +38,7 @@
 
         function createRing() {
                 let geometry = new THREE.RingGeometry(1, 2, 32);
-                let material  = new THREE.MeshBasicMaterial({color: 0x032322});
+                let material  = new THREE.MeshPhongMaterial({color: 0x032322});
                 ring = new THREE.Mesh(geometry, material);
                 scene.add(ring);
                 ring.position.x=-4;
@@ -50,7 +50,9 @@
             // 1. create the scene
             scene = new THREE.Scene();
             scene.background = new THREE.Color(0xababab);
-            
+            light = new THREE.DirectionalLight(0xFFFFFF, 1);
+            light.position.set(0, 0, 15);
+
             // 2. create an locate the camera       
             camera = new THREE.PerspectiveCamera(30, window.innerWidth / window.innerHeight, 
                         1, 1000);
@@ -62,6 +64,7 @@
             createPlane();
             createCircle();
             createRing();
+            scene.add(light)
             
             // 4. create the renderer     
             renderer = new THREE.WebGLRenderer();   
@@ -73,9 +76,9 @@
       
         
         // main animation loop - calls 50-60 in a second.
+        let move = 0.05;
         let mainLoop = function() {
-            let move = 0.01;
-            if (parseInt(cube.position.x) == 3) {
+            if (parseInt(cube.position.x) == 3 || parseInt(cube.position.x) == -1) {
                 move = -move;
             }
 
@@ -97,7 +100,6 @@
             ring.position.x += move;
 
             
-            console.log(cube.position)
             renderer.render(scene, camera);
             requestAnimationFrame(mainLoop);
         };
