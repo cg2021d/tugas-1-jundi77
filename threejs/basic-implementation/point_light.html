@@ -77,29 +77,14 @@
         
         // main animation loop - calls 50-60 in a second.
         let move = 0.05;
-        let mainLoop = function() {
-            if (parseInt(cube.position.x) == 3 || parseInt(cube.position.x) == -1) {
+            let mainLoop = function() {
+            if (parseInt(light.position.x) == 15 || parseInt(light.position.x) == -4) {
                 move = -move;
             }
 
-        //     console.log("Hello");
-            cube.rotation.x += move;
-            cube.rotation.y += move;
-            cube.position.x += move;
+            light.position.x += move
+            light.position.y += move
 
-            plane.rotation.x += move;
-            plane.rotation.y += move;
-            plane.position.x += move;
-
-            circle.rotation.x += move;
-            circle.rotation.y += move;
-            circle.position.x += move;
-
-            ring.rotation.x += move;
-            ring.rotation.y += move;
-            ring.position.x += move;
-
-            
             renderer.render(scene, camera);
             requestAnimationFrame(mainLoop);
         };

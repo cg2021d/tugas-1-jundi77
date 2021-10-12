@@ -51,13 +51,16 @@
             scene = new THREE.Scene();
             scene.background = new THREE.Color(0xababab);
             light = new THREE.SpotLight(0xFFFFFF, 1);
-            light.position.set(-1, 0, 0);
+            light.position.set(0, 0, 10);
             light.target.position.set(0, 0, 0);
 
             // 2. create an locate the camera       
             camera = new THREE.PerspectiveCamera(30, window.innerWidth / window.innerHeight, 
                         1, 1000);
+            camera.position.x = 5;
+            camera.position.y = 5;
             camera.position.z = 15;
+            camera.lookAt(scene.position)
             
             // 3. create an locate the object on the scene           
             // ...
@@ -78,29 +81,14 @@
         
         // main animation loop - calls 50-60 in a second.
         let move = 0.05;
-        let mainLoop = function() {
-            if (parseInt(cube.position.x) == 3 || parseInt(cube.position.x) == -1) {
+            let mainLoop = function() {
+            if (parseInt(light.position.x) == 9 || parseInt(light.position.x) == -4) {
                 move = -move;
             }
 
-        //     console.log("Hello");
-            cube.rotation.x += move;
-            cube.rotation.y += move;
-            cube.position.x += move;
+            light.position.x += move
+            light.position.y += move
 
-            plane.rotation.x += move;
-            plane.rotation.y += move;
-            plane.position.x += move;
-
-            circle.rotation.x += move;
-            circle.rotation.y += move;
-            circle.position.x += move;
-
-            ring.rotation.x += move;
-            ring.rotation.y += move;
-            ring.position.x += move;
-
-            
             renderer.render(scene, camera);
             requestAnimationFrame(mainLoop);
         };
